@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Lumière Skincare</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lumière <span>·</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li><li><a href="/about.html">About</a></li>
+      <li><a href="/products.html">Products</a></li><li><a href="/blog.html">Skin Tips</a></li>
+      <li><a href="/testimonials.html">Reviews</a></li><li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-user-name"></span><a href="/orders.html" class="btn-nav nav-orders-link" style="display:none">My Orders</a>
+      <a href="/cart.html" class="nav-icon-btn" style="position:relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">0</span>
+      </a>
+      <a href="/login.html" class="btn-nav nav-login-link">Sign In</a>
+      <button class="btn-nav nav-logout-btn" onclick="Auth.logout()" style="display:none">Log Out</button>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a><a href="/products.html">Products</a>
+  <a href="/cart.html">Cart</a><a href="/orders.html" class="nav-orders-link" style="display:none">My Orders</a><a href="/login.html">Login</a>
+</div>
+
+<!-- Loading -->
+<div id="pageLoading" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding-top:70px">
+  <div style="text-align:center;color:var(--gray-400)">
+    <div style="font-size:3rem;animation:spin 1.5s linear infinite;display:inline-block">🌸</div>
+    <p style="margin-top:1rem">Loading product...</p>
+  </div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+
+<!-- Page Error -->
+<div id="pageError" style="display:none;min-height:100vh;display:none;align-items:center;justify-content:center;padding-top:70px">
+  <div style="text-align:center">
+    <div style="font-size:4rem;margin-bottom:1rem">😕</div>
+    <h2 style="margin-bottom:0.5rem">Product Not Found</h2>
+    <p style="color:var(--gray-400);margin-bottom:2rem">This product doesn't exist or the server is offline.</p>
+    <a href="/products.html" class="btn btn-primary">Browse All Products</a>
+  </div>
+</div>
+
+<!-- Product Detail -->
+<div id="productPage" style="display:none">
+  <section style="padding:calc(70px + 3rem) 0 4rem">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/">Home</a><span class="sep"> / </span>
+        <a href="/products.html">Products</a><span class="sep"> / </span>
+        <span id="breadcrumbName" style="color:var(--espresso)"></span>
+      </nav>
+
+      <div class="product-detail-grid">
+        <!-- Image -->
+        <div class="product-detail-images">
+          <div class="product-main-img">
+            <img id="mainProductImg" src="" alt="Product"
+              onerror="this.src='https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80'">
+          </div>
+          <div style="display:flex;gap:0.75rem;margin-top:0.75rem" id="thumbnailRow"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="product-detail-info">
+          <span class="section-label" id="productCat"></span>
+          <h1 class="product-detail-name" id="productName"></h1>
+
+          <div class="review-summary" id="reviewSummary"></div>
+
+          <div class="product-detail-price" id="productPrice"></div>
+
+          <p class="product-detail-desc" id="productDesc"></p>
+
+          <!-- Skin Types -->
+          <div id="skinTypeRow" style="margin-bottom:1.5rem;display:none">
+            <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--espresso)">Good For:</span>
+            <div id="skinTypes" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem"></div>
+          </div>
+
+          <!-- Qty + Cart -->
+          <div style="display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap">
+            <div class="quantity-control">
+              <button class="qty-btn" id="qtyMinus" onclick="changeQty(-1)">−</button>
+              <span class="qty-value" id="qtyDisplay">1</span>
+              <button class="qty-btn" id="qtyPlus"  onclick="changeQty(1)">+</button>
+            </div>
+            <button id="addToCartBtn" class="btn btn-rose" style="flex:1;min-width:160px" onclick="addToCartDetail()">
+              Add to Cart 🛒
+            </button>
+          </div>
+
+          <a href="/cart.html" id="buyNowBtn" class="btn btn-outline btn-full" onclick="addToCartDetail()" style="margin-bottom:1.5rem">
+            Buy Now — Checkout
+          </a>
+
+          <p id="stockStatus" style="font-size:0.82rem;margin-bottom:1.5rem"></p>
+
+          <!-- Accordions -->
+          <div id="accordionWrap">
+            <div class="accordion-item">
+              <button class="accordion-header">Key Ingredients <span class="arrow">▾</span></button>
+              <div class="accordion-body"><p id="ingredientsText" style="line-height:1.8"></p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-header">How To Use <span class="arrow">▾</span></button>
+              <div class="accordion-body"><p id="howToUseText" style="line-height:1.8"></p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-header">Shipping &amp; Returns <span class="arrow">▾</span></button>
+              <div class="accordion-body">
+                <p>Free shipping on all orders over $50. Standard shipping 3–5 business days. Express available at checkout.</p>
+                <p style="margin-top:0.75rem">Returns accepted within 30 days. Products must be at least 50% full. <a href="/contact.html" style="color:var(--rose)">Contact us</a> to initiate a return.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trust badges -->
+          <div style="display:flex;gap:1.5rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--gray-200);flex-wrap:wrap">
+            <span style="font-size:0.75rem;color:var(--gray-400);display:flex;align-items:center;gap:0.4rem">🔒 Secure Checkout</span>
+            <span style="font-size:0.75rem;color:var(--gray-400);display:flex;align-items:center;gap:0.4rem">🐰 Cruelty-Free</span>
+            <span style="font-size:0.75rem;color:var(--gray-400);display:flex;align-items:center;gap:0.4rem">🌿 Clean Formula</span>
+            <span style="font-size:0.75rem;color:var(--gray-400);display:flex;align-items:center;gap:0.4rem">↩️ 30-Day Returns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section style="background:white;padding:4rem 0">
+    <div class="container" style="max-width:860px">
+      <h2 style="margin-bottom:2rem">Customer Reviews</h2>
+
+      <!-- Rating overview -->
+      <div id="ratingOverview" style="display:flex;align-items:center;gap:2rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--gray-200);flex-wrap:wrap"></div>
+
+      <!-- Write review -->
+      <div style="background:var(--gray-100);border-radius:var(--radius-lg);padding:2rem;margin-bottom:2rem">
+        <h4 style="margin-bottom:1rem">Write a Review</h4>
+        <div id="reviewFormArea"></div>
+      </div>
+
+      <!-- Reviews list -->
+      <div id="reviewsList"></div>
+    </div>
+  </section>
+
+  <!-- Related Products -->
+  <section style="background:var(--cream);padding:4rem 0">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:2rem">
+        <h2 style="font-size:1.8rem">You Might Also Like</h2>
+      </div>
+      <div class="products-grid" id="relatedProducts"></div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© 2025 Lumière Skincare</span>
+      <a href="/products.html" style="color:rgba(250,246,241,0.5)">← All Products</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+var currentProduct = null;
+var selectedQty = 1;
+
+function changeQty(delta) {
+  var max = currentProduct ? (currentProduct.stock || 99) : 99;
+  selectedQty = Math.max(1, Math.min(selectedQty + delta, max));
+  document.getElementById('qtyDisplay').textContent = selectedQty;
+}
+
+function addToCartDetail() {
+  if (currentProduct) Cart.add(currentProduct, selectedQty);
+}
+
+async function loadProduct() {
+  var id = new URLSearchParams(window.location.search).get('id');
+  if (!id) { window.location.href = '/products.html'; return; }
+
+  try {
+    var data = await api.getProduct(id);
+    currentProduct = data.product;
+    renderProduct(currentProduct);
+    loadReviews(id);
+    loadRelated(currentProduct.category, id);
+
+    document.getElementById('pageLoading').style.display = 'none';
+    document.getElementById('productPage').style.display = 'block';
+    initAccordions();
+    initScrollAnimations();
+  } catch (err) {
+    document.getElementById('pageLoading').style.display = 'none';
+    document.getElementById('pageError').style.display = 'flex';
+  }
+}
+
+function renderProduct(p) {
+  document.title = p.name + ' — Lumière Skincare';
+
+  // Breadcrumb
+  document.getElementById('breadcrumbName').textContent = p.name;
+
+  // Image
+  document.getElementById('mainProductImg').src = p.image || 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80';
+  document.getElementById('mainProductImg').alt = p.name;
+
+  // Category
+  document.getElementById('productCat').textContent = (p.category || '').replace(/-/g, ' ');
+
+  // Name
+  document.getElementById('productName').textContent = p.name;
+
+  // Rating summary
+  var stars = '★'.repeat(Math.round(p.rating || 0)) + '☆'.repeat(5 - Math.round(p.rating || 0));
+  document.getElementById('reviewSummary').innerHTML =
+    '<span style="color:#F59E0B;font-size:1.1rem">' + stars + '</span>' +
+    '<span style="font-size:0.88rem;color:var(--gray-600)">' + Number(p.rating||0).toFixed(1) + '</span>' +
+    '<span style="font-size:0.88rem;color:var(--gray-400)">(' + (p.reviewCount||0) + ' reviews)</span>';
+
+  // Price
+  var discount = p.originalPrice && p.originalPrice > p.price
+    ? Math.round((1 - p.price/p.originalPrice)*100) : 0;
+  var priceHtml = '<span>$' + Number(p.price).toFixed(2) + '</span>';
+  if (p.originalPrice) priceHtml += '<span style="font-size:1.2rem;color:var(--gray-400);text-decoration:line-through">$' + Number(p.originalPrice).toFixed(2) + '</span>';
+  if (discount > 0) priceHtml += '<span class="badge badge-sale">-' + discount + '%</span>';
+  document.getElementById('productPrice').innerHTML = priceHtml;
+
+  // Description
+  document.getElementById('productDesc').textContent = p.description || '';
+
+  // Skin types
+  if (p.skinType && p.skinType.length) {
+    var stHtml = p.skinType.map(function(s) {
+      return '<span class="badge" style="background:var(--blush-light);color:var(--rose-dark);border:1px solid var(--blush)">' + s + ' skin</span>';
+    }).join('');
+    document.getElementById('skinTypes').innerHTML = stHtml;
+    document.getElementById('skinTypeRow').style.display = 'block';
+  }
+
+  // Stock status
+  var stockEl = document.getElementById('stockStatus');
+  if (p.stock === 0) {
+    stockEl.innerHTML = '<span style="color:#dc2626">❌ Out of stock</span>';
+    document.getElementById('addToCartBtn').disabled = true;
+    document.getElementById('addToCartBtn').textContent = 'Out of Stock';
+  } else if (p.stock < 10) {
+    stockEl.innerHTML = '<span style="color:#d97706">⚠️ Only ' + p.stock + ' left in stock — order soon!</span>';
+  } else {
+    stockEl.innerHTML = '<span style="color:#16a34a">✅ In stock — ships within 1-2 business days</span>';
+  }
+
+  // Max qty for stepper
+  document.getElementById('qtyPlus').onclick = function() { changeQty(1); };
+
+  // Ingredients & How-to-use
+  document.getElementById('ingredientsText').textContent =
+    p.ingredients && p.ingredients.length ? p.ingredients.join(', ') : 'See packaging for full ingredient list.';
+  document.getElementById('howToUseText').textContent =
+    p.howToUse || 'See product packaging for usage instructions.';
+
+  // Rating overview widget
+  document.getElementById('ratingOverview').innerHTML =
+    '<div style="text-align:center">' +
+      '<div style="font-family:var(--font-display);font-size:4rem;line-height:1;color:var(--espresso)">' + Number(p.rating||0).toFixed(1) + '</div>' +
+      '<div style="color:#F59E0B;font-size:1.3rem">' + stars + '</div>' +
+      '<p style="font-size:0.78rem;color:var(--gray-400);margin:0">Based on ' + (p.reviewCount||0) + ' reviews</p>' +
+    '</div>';
+}
+
+async function loadReviews(productId) {
+  var area = document.getElementById('reviewFormArea');
+  var list = document.getElementById('reviewsList');
+  var user = Auth.getUser();
+
+  // Review form
+  if (user && Auth.isLoggedIn()) {
+    area.innerHTML =
+      '<div id="starPickerWrap" style="margin-bottom:1rem">' +
+        '<label class="form-label">Your Rating *</label>' +
+        '<div id="starPicker" style="font-size:2rem;cursor:pointer;display:inline-block;color:var(--gray-200)" data-val="0">★★★★★</div>' +
+        '<input type="hidden" id="ratingVal" value="0">' +
+      '</div>' +
+      '<div class="form-row">' +
+        '<div class="form-group"><label class="form-label">Review Title</label><input type="text" id="revTitle" class="form-input" placeholder="Summary of your experience"></div>' +
+        '<div class="form-group"><label class="form-label">Your Skin Type</label>' +
+          '<select id="revSkin" class="form-select"><option value="">Select</option><option>oily</option><option>dry</option><option>combination</option><option>sensitive</option><option>normal</option></select>' +
+        '</div>' +
+      '</div>' +
+      '<div class="form-group"><label class="form-label">Your Review *</label>' +
+        '<textarea id="revComment" class="form-textarea" rows="4" placeholder="Tell others about your experience with this product..."></textarea>' +
+      '</div>' +
+      '<button class="btn btn-rose" onclick="submitReview(\'' + productId + '\')">Submit Review</button>';
+
+    // Star picker interaction
+    var picker = document.getElementById('starPicker');
+    picker.addEventListener('mousemove', function(e) {
+      var rect = this.getBoundingClientRect();
+      var pct = (e.clientX - rect.left) / rect.width;
+      var hov = Math.ceil(pct * 5);
+      hov = Math.max(1, Math.min(5, hov));
+      this.innerHTML = '<span style="color:#F59E0B">' + '★'.repeat(hov) + '</span>' + '★'.repeat(5-hov);
+    });
+    picker.addEventListener('mouseleave', function() {
+      var val = parseInt(document.getElementById('ratingVal').value) || 0;
+      if (val > 0) {
+        this.innerHTML = '<span style="color:#F59E0B">' + '★'.repeat(val) + '</span>' + '★'.repeat(5-val);
+      } else {
+        this.innerHTML = '★★★★★';
+        this.style.color = 'var(--gray-200)';
+      }
+    });
+    picker.addEventListener('click', function(e) {
+      var rect = this.getBoundingClientRect();
+      var val = Math.ceil(((e.clientX - rect.left) / rect.width) * 5);
+      val = Math.max(1, Math.min(5, val));
+      document.getElementById('ratingVal').value = val;
+      this.innerHTML = '<span style="color:#F59E0B">' + '★'.repeat(val) + '</span><span style="color:var(--gray-200)">' + '★'.repeat(5-val) + '</span>';
+    });
+  } else {
+    area.innerHTML = '<p style="color:var(--gray-400);font-size:0.88rem"><a href="/login.html" style="color:var(--rose)">Sign in</a> to leave a review.</p>';
+  }
+
+  // Load reviews list
+  list.innerHTML = '<p style="color:var(--gray-400);font-size:0.88rem">Loading reviews...</p>';
+  try {
+    var data = await api.getReviews(productId);
+    if (!data.reviews || data.reviews.length === 0) {
+      list.innerHTML = '<div style="text-align:center;padding:2rem 0;color:var(--gray-400)"><p>No reviews yet — be the first!</p></div>';
+      return;
+    }
+    list.innerHTML = data.reviews.map(function(r) {
+      var rStars = '★'.repeat(r.rating) + '<span style="color:var(--gray-200)">★</span>'.repeat(5-r.rating);
+      var reviewerName = r.userName || (r.user && r.user.name) || 'Anonymous';
+      return '<div style="padding:1.5rem 0;border-bottom:1px solid var(--gray-200)">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem">' +
+          '<div>' +
+            '<strong style="font-size:0.9rem;color:var(--espresso)">' + reviewerName + '</strong>' +
+            (r.verified ? ' <span class="badge" style="background:#dcfce7;color:#16a34a;font-size:0.6rem">✓ Verified Purchase</span>' : '') +
+          '</div>' +
+          '<span style="font-size:0.75rem;color:var(--gray-400)">' + new Date(r.createdAt).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) + '</span>' +
+        '</div>' +
+        '<div style="color:#F59E0B;margin-bottom:0.35rem">' + rStars + '</div>' +
+        (r.title ? '<strong style="font-size:0.88rem;display:block;margin-bottom:0.3rem;color:var(--espresso)">' + r.title + '</strong>' : '') +
+        '<p style="font-size:0.88rem;line-height:1.75;margin:0">' + r.comment + '</p>' +
+        (r.skinType ? '<span style="font-size:0.75rem;color:var(--rose);display:block;margin-top:0.4rem">Skin type: ' + r.skinType + '</span>' : '') +
+      '</div>';
+    }).join('');
+  } catch (err) {
+    list.innerHTML = '<p style="color:var(--gray-400);font-size:0.88rem">Could not load reviews.</p>';
+  }
+}
+
+async function submitReview(productId) {
+  var rating  = parseInt(document.getElementById('ratingVal').value) || 0;
+  var title   = document.getElementById('revTitle').value.trim();
+  var comment = document.getElementById('revComment').value.trim();
+  var skinType = document.getElementById('revSkin').value;
+
+  if (!rating) { Toast.show('Please select a star rating.', 'error'); return; }
+  if (!comment) { Toast.show('Please write your review.', 'error'); return; }
+
+  var btn = document.querySelector('#reviewFormArea button');
+  btn.disabled = true; btn.textContent = 'Submitting...';
+
+  try {
+    await api.submitReview({ productId: productId, rating: rating, title: title, comment: comment, skinType: skinType });
+    Toast.show('Review submitted! Thank you 🌸', 'success');
+    loadReviews(productId);
+    // Update local review count
+    if (currentProduct) {
+      currentProduct.reviewCount = (currentProduct.reviewCount||0) + 1;
+    }
+  } catch (err) {
+    Toast.show(err.message, 'error');
+    btn.disabled = false; btn.textContent = 'Submit Review';
+  }
+}
+
+async function loadRelated(category, currentId) {
+  try {
+    var data = await api.getProducts({ category: category, limit: 4 });
+    var related = (data.products || []).filter(function(p) { return String(p._id) !== String(currentId); }).slice(0, 4);
+    var grid = document.getElementById('relatedProducts');
+    if (related.length > 0) {
+      grid.innerHTML = related.map(buildProductCard).join('');
+      initScrollAnimations();
+    } else {
+      document.querySelector('#relatedProducts').closest('section').style.display = 'none';
+    }
+  } catch (e) {
+    document.querySelector('#relatedProducts').closest('section').style.display = 'none';
+  }
+}
+
+loadProduct();
+</script>
+</body>
+</html>

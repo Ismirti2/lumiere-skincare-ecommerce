@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products — Lumière Skincare</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lumière <span>·</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li><li><a href="/about.html">About</a></li>
+      <li><a href="/products.html">Products</a></li><li><a href="/blog.html">Skin Tips</a></li>
+      <li><a href="/testimonials.html">Reviews</a></li><li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-user-name"></span><a href="/orders.html" class="btn-nav nav-orders-link" style="display:none">My Orders</a>
+      <a href="/cart.html" class="nav-icon-btn" style="position:relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">0</span>
+      </a>
+      <a href="/login.html" class="btn-nav nav-login-link">Sign In</a>
+      <button class="btn-nav nav-logout-btn" onclick="Auth.logout()" style="display:none">Log Out</button>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a><a href="/about.html">About</a><a href="/products.html">Products</a>
+  <a href="/blog.html">Skin Tips</a><a href="/testimonials.html">Reviews</a>
+  <a href="/contact.html">Contact</a><a href="/cart.html">Cart</a><a href="/orders.html" class="nav-orders-link" style="display:none">My Orders</a><a href="/login.html">Login</a>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Our Collection</span>
+    <h1>All Products</h1>
+    <p>Thoughtfully formulated skincare for every skin type and concern.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+
+    <!-- Search & Sort -->
+    <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center">
+      <div style="flex:1;min-width:220px;position:relative">
+        <input type="text" id="searchInput" class="form-input" placeholder="🔍  Search products..." style="padding-left:1rem">
+      </div>
+      <select id="sortSelect" class="form-select" style="width:auto;min-width:185px">
+        <option value="">Sort: Default</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+        <option value="newest">Newest</option>
+        <option value="bestseller">Bestselling</option>
+      </select>
+      <span id="productCount" style="font-size:0.82rem;color:var(--gray-400);white-space:nowrap"></span>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-bar">
+      <button class="filter-chip active" data-type="category" data-value="">All</button>
+      <button class="filter-chip" data-type="category" data-value="serum">Serums</button>
+      <button class="filter-chip" data-type="category" data-value="moisturizer">Moisturizers</button>
+      <button class="filter-chip" data-type="category" data-value="cleanser">Cleansers</button>
+      <button class="filter-chip" data-type="category" data-value="toner">Toners</button>
+      <button class="filter-chip" data-type="category" data-value="sunscreen">Sunscreen</button>
+      <button class="filter-chip" data-type="category" data-value="mask">Masks</button>
+      <button class="filter-chip" data-type="category" data-value="eye-care">Eye Care</button>
+      <button class="filter-chip" data-type="category" data-value="set">Sets</button>
+      <span style="color:var(--gray-300);padding:0 0.25rem">|</span>
+      <button class="filter-chip" data-type="bestseller" data-value="true">⭐ Bestsellers</button>
+      <button class="filter-chip" data-type="featured" data-value="true">✨ Featured</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productsGrid"></div>
+
+    <!-- Server Error / Empty State -->
+    <div id="serverError" style="display:none;text-align:center;padding:4rem 0">
+      <div style="font-size:3rem;margin-bottom:1rem">⚠️</div>
+      <h3 style="font-size:1.3rem;color:var(--espresso);margin-bottom:0.5rem">Cannot connect to server</h3>
+      <p style="color:var(--gray-400);margin-bottom:1.5rem">Make sure the backend is running:</p>
+      <code style="background:var(--gray-100);padding:0.75rem 1.5rem;border-radius:8px;font-size:0.88rem;display:block;max-width:400px;margin:0 auto">cd backend &amp;&amp; npm install &amp;&amp; npm run dev</code>
+    </div>
+    <div id="emptyState" style="display:none" class="empty-state">
+      <div class="empty-icon">🌸</div>
+      <h3>No products found</h3>
+      <p>Try adjusting your filters or search terms.</p>
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination" style="display:flex;justify-content:center;gap:0.5rem;margin-top:3rem;flex-wrap:wrap"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© 2025 Lumière Skincare</span>
+      <a href="/" style="color:rgba(250,246,241,0.5)">← Back to Home</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+var currentFilters = { category: '', bestseller: '', featured: '', sort: '', search: '', page: 1 };
+var searchTimer = null;
+
+async function loadProducts() {
+  var grid = document.getElementById('productsGrid');
+  grid.innerHTML = buildSkeletonCards(6);
+  document.getElementById('serverError').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'none';
+
+  var params = { page: currentFilters.page, limit: 12 };
+  if (currentFilters.category)   params.category   = currentFilters.category;
+  if (currentFilters.bestseller) params.bestseller = currentFilters.bestseller;
+  if (currentFilters.featured)   params.featured   = currentFilters.featured;
+  if (currentFilters.sort)       params.sort       = currentFilters.sort;
+  if (currentFilters.search)     params.search     = currentFilters.search;
+
+  try {
+    var data = await api.getProducts(params);
+    grid.innerHTML = '';
+    document.getElementById('productCount').textContent = data.pagination.total + ' products';
+
+    if (!data.products || data.products.length === 0) {
+      document.getElementById('emptyState').style.display = 'block';
+      return;
+    }
+
+    grid.innerHTML = data.products.map(buildProductCard).join('');
+    initScrollAnimations();
+    renderPagination(data.pagination);
+
+  } catch (err) {
+    grid.innerHTML = '';
+    document.getElementById('serverError').style.display = 'block';
+  }
+}
+
+function renderPagination(pg) {
+  var el = document.getElementById('pagination');
+  if (!pg || pg.pages <= 1) { el.innerHTML = ''; return; }
+  var html = '';
+  if (pg.page > 1) html += '<button class="btn btn-sm btn-outline" onclick="changePage(' + (pg.page-1) + ')">← Prev</button>';
+  for (var i = 1; i <= pg.pages; i++) {
+    if (i === pg.page) {
+      html += '<button class="btn btn-sm btn-primary">' + i + '</button>';
+    } else if (i === 1 || i === pg.pages || Math.abs(i - pg.page) <= 1) {
+      html += '<button class="btn btn-sm btn-outline" onclick="changePage(' + i + ')">' + i + '</button>';
+    } else if (Math.abs(i - pg.page) === 2) {
+      html += '<span style="padding:0.4rem 0.6rem;color:var(--gray-400)">…</span>';
+    }
+  }
+  if (pg.page < pg.pages) html += '<button class="btn btn-sm btn-outline" onclick="changePage(' + (pg.page+1) + ')">Next →</button>';
+  el.innerHTML = html;
+}
+
+function changePage(p) {
+  currentFilters.page = p;
+  loadProducts();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Filter chip clicks
+document.querySelectorAll('.filter-chip').forEach(function(chip) {
+  chip.addEventListener('click', function() {
+    var type  = this.getAttribute('data-type');
+    var value = this.getAttribute('data-value');
+
+    // Toggle special filters
+    if (type === 'bestseller' || type === 'featured') {
+      var isActive = this.classList.contains('active');
+      // Remove active from same type
+      document.querySelectorAll('.filter-chip[data-type="' + type + '"]').forEach(function(c) {
+        c.classList.remove('active');
+      });
+      currentFilters[type] = isActive ? '' : value;
+      if (!isActive) this.classList.add('active');
+    } else {
+      document.querySelectorAll('.filter-chip[data-type="' + type + '"]').forEach(function(c) {
+        c.classList.remove('active');
+      });
+      this.classList.add('active');
+      currentFilters[type] = value;
+    }
+    currentFilters.page = 1;
+    loadProducts();
+  });
+});
+
+// Sort change
+document.getElementById('sortSelect').addEventListener('change', function() {
+  currentFilters.sort = this.value;
+  currentFilters.page = 1;
+  loadProducts();
+});
+
+// Search input with debounce
+document.getElementById('searchInput').addEventListener('input', function() {
+  var val = this.value;
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(function() {
+    currentFilters.search = val;
+    currentFilters.page = 1;
+    loadProducts();
+  }, 450);
+});
+
+// Read URL params on load
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('category')) {
+    currentFilters.category = params.get('category');
+    var chip = document.querySelector('.filter-chip[data-value="' + currentFilters.category + '"]');
+    if (chip) {
+      document.querySelector('.filter-chip[data-type="category"].active').classList.remove('active');
+      chip.classList.add('active');
+    }
+  }
+  if (params.get('bestseller') === 'true') {
+    currentFilters.bestseller = 'true';
+    var bChip = document.querySelector('.filter-chip[data-value="true"][data-type="bestseller"]');
+    if (bChip) bChip.classList.add('active');
+  }
+  if (params.get('featured') === 'true') {
+    currentFilters.featured = 'true';
+    var fChip = document.querySelector('.filter-chip[data-value="true"][data-type="featured"]');
+    if (fChip) fChip.classList.add('active');
+  }
+})();
+
+loadProducts();
+</script>
+</body>
+</html>

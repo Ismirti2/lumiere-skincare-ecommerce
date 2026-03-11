@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart — Lumière Skincare</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lumière <span>·</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li><li><a href="/products.html">Products</a></li>
+      <li><a href="/blog.html">Skin Tips</a></li><li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-user-name"></span><a href="/orders.html" class="btn-nav nav-orders-link" style="display:none">My Orders</a>
+      <a href="/cart.html" class="nav-icon-btn" style="position:relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">0</span>
+      </a>
+      <a href="/login.html" class="btn-nav nav-login-link">Sign In</a>
+      <button class="btn-nav nav-logout-btn" onclick="Auth.logout()" style="display:none">Log Out</button>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a><a href="/products.html">Products</a>
+  <a href="/cart.html">Cart</a><a href="/orders.html" class="nav-orders-link" style="display:none">My Orders</a><a href="/login.html">Login</a>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Review</span>
+    <h1>Your Cart</h1>
+    <p>Review your items before proceeding to checkout.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    <div id="cartContent"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© 2025 Lumière Skincare</span>
+      <a href="/products.html" style="color:rgba(250,246,241,0.5)">← Continue Shopping</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+function renderCart() {
+  var items   = Cart.get();
+  var wrapper = document.getElementById('cartContent');
+
+  if (!items.length) {
+    wrapper.innerHTML =
+      '<div class="empty-state">' +
+        '<div class="empty-icon">🛒</div>' +
+        '<h3>Your cart is empty</h3>' +
+        '<p>Looks like you haven\'t added anything yet. Discover your next skincare must-have.</p>' +
+        '<a href="/products.html" class="btn btn-primary" style="margin-top:1.5rem">Shop All Products</a>' +
+      '</div>';
+    return;
+  }
+
+  var subtotal = Cart.total();
+  var shipping = subtotal >= 50 ? 0 : 5.99;
+  var tax      = Math.round(subtotal * 0.08 * 100) / 100;
+  var total    = Math.round((subtotal + shipping + tax) * 100) / 100;
+
+  wrapper.innerHTML =
+    '<div class="cart-layout">' +
+      '<!-- Items -->' +
+      '<div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">' +
+          '<h3 style="font-size:1.2rem">' + items.length + ' Item' + (items.length > 1 ? 's' : '') + '</h3>' +
+          '<button class="btn btn-sm btn-outline-rose" onclick="confirmClear()">Clear All</button>' +
+        '</div>' +
+        '<div id="cartItems">' +
+          items.map(renderCartItem).join('') +
+        '</div>' +
+        '<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--gray-200)">' +
+          '<a href="/products.html" style="color:var(--rose);font-size:0.88rem">← Continue Shopping</a>' +
+        '</div>' +
+      '</div>' +
+
+      '<!-- Summary -->' +
+      '<div class="order-summary">' +
+        '<h3>Order Summary</h3>' +
+        (subtotal >= 50
+          ? '<div class="free-shipping-badge">🚚 You qualify for FREE shipping!</div>'
+          : '<div style="font-size:0.78rem;color:var(--gray-400);margin-bottom:1rem;background:var(--gray-100);padding:0.6rem 0.8rem;border-radius:8px">Add $' + (50 - subtotal).toFixed(2) + ' more for free shipping</div>'
+        ) +
+        '<div class="summary-row"><span>Subtotal</span><span>$' + subtotal.toFixed(2) + '</span></div>' +
+        '<div class="summary-row"><span>Shipping</span><span>' + (shipping === 0 ? '<span style="color:#16a34a;font-weight:500">FREE</span>' : '$' + shipping.toFixed(2)) + '</span></div>' +
+        '<div class="summary-row"><span>Tax (8%)</span><span>$' + tax.toFixed(2) + '</span></div>' +
+        '<div class="summary-row total"><span>Total</span><strong>$' + total.toFixed(2) + '</strong></div>' +
+        '<a href="/checkout.html" class="btn btn-rose btn-full" style="margin-top:1rem;margin-bottom:0.75rem">Proceed to Checkout →</a>' +
+        '<a href="/products.html" class="btn btn-outline btn-full">Continue Shopping</a>' +
+        '<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--gray-200);display:flex;justify-content:center;gap:2rem">' +
+          '<span style="font-size:0.72rem;color:var(--gray-400)">🔒 Secure</span>' +
+          '<span style="font-size:0.72rem;color:var(--gray-400)">↩️ 30-Day Returns</span>' +
+          '<span style="font-size:0.72rem;color:var(--gray-400)">🌿 Clean Beauty</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+function renderCartItem(item) {
+  var lineTotal = (item.price * item.quantity).toFixed(2);
+  return '<div class="cart-item" data-id="' + item.productId + '">' +
+    '<img class="cart-item-img"' +
+         ' src="' + (item.image || 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&q=80') + '"' +
+         ' alt="' + item.name + '"' +
+         ' onerror="this.src=\'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&q=80\'">' +
+    '<div class="cart-item-info">' +
+      '<div class="cart-item-name">' + item.name + '</div>' +
+      '<div class="cart-item-price">$' + item.price.toFixed(2) + ' each</div>' +
+      '<div class="quantity-control" style="margin-top:0.6rem">' +
+        '<button class="qty-btn" onclick="updateQty(\'' + item.productId + '\',' + (item.quantity - 1) + ')">−</button>' +
+        '<span class="qty-value">' + item.quantity + '</span>' +
+        '<button class="qty-btn" onclick="updateQty(\'' + item.productId + '\',' + (item.quantity + 1) + ')">+</button>' +
+      '</div>' +
+    '</div>' +
+    '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem">' +
+      '<div class="cart-item-total">$' + lineTotal + '</div>' +
+      '<button class="cart-remove" onclick="removeItem(\'' + item.productId + '\')" title="Remove item">🗑️</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function updateQty(productId, qty) {
+  Cart.updateQty(productId, qty);
+  if (qty <= 0) Toast.show('Item removed', 'info');
+  renderCart();
+}
+
+function removeItem(productId) {
+  Cart.remove(productId);
+  Toast.show('Item removed from cart', 'info');
+  renderCart();
+}
+
+function confirmClear() {
+  if (window.confirm('Remove all items from your cart?')) {
+    Cart.clear();
+    Toast.show('Cart cleared', 'info');
+    renderCart();
+  }
+}
+
+// Re-render when cart changes (e.g. from another tab or nav click)
+window.addEventListener('cartUpdated', function() { renderCart(); });
+
+renderCart();
+</script>
+</body>
+</html>

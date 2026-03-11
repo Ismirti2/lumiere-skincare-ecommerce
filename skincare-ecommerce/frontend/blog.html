@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Tips & Blog — Lumière Skincare</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lumière <span>·</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/products.html">Products</a></li>
+      <li><a href="/blog.html" class="active">Skin Tips</a></li>
+      <li><a href="/testimonials.html">Reviews</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-user-name" style="font-size:0.82rem;color:var(--rose);display:none"></span>
+      <a href="/cart.html" class="nav-icon-btn">🛒<span class="cart-badge">0</span></a>
+      <a href="/login.html" class="btn-nav nav-login-link">Sign In</a>
+      <button class="btn-nav nav-logout-btn" style="display:none" onclick="Auth.logout()">Log Out</button>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a><a href="/about.html">About</a><a href="/products.html">Products</a>
+  <a href="/blog.html">Skin Tips</a><a href="/testimonials.html">Reviews</a>
+  <a href="/contact.html">Contact</a><a href="/cart.html">Cart</a><a href="/orders.html" class="nav-orders-link" style="display:none">My Orders</a><a href="/login.html">Login</a>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Knowledge Hub</span>
+    <h1>Skin Tips & Guides</h1>
+    <p>Expert knowledge to help you build your best skin ever — ingredients, routines, and science explained simply.</p>
+  </div>
+</div>
+
+<!-- Featured Post -->
+<section class="section-pad-sm" style="background:var(--cream)">
+  <div class="container">
+    <div class="fade-in" style="background:white;border-radius:var(--radius-xl);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:var(--shadow-md)">
+      <div style="overflow:hidden;min-height:360px">
+        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80" alt="Featured" style="width:100%;height:100%;object-fit:cover;transition:var(--transition-slow)" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="padding:3rem;display:flex;flex-direction:column;justify-content:center">
+        <span class="badge badge-new" style="display:inline-block;width:fit-content;margin-bottom:1rem">✨ Editor's Pick</span>
+        <div class="blog-category">Routines</div>
+        <h2 style="margin-bottom:1rem;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.2">The Science of Layering: How to Order Your Skincare Products</h2>
+        <p style="margin-bottom:1.5rem">Did you know applying products in the wrong order can reduce their effectiveness by up to 50%? We break down exactly how to layer for maximum results.</p>
+        <div style="display:flex;align-items:center;gap:1.5rem;font-size:0.78rem;color:var(--gray-400);margin-bottom:1.5rem">
+          <span>📖 8 min read</span><span>March 2025</span><span>by Dr. Clara Chen</span>
+        </div>
+        <a href="#layering" class="btn btn-primary" style="width:fit-content">Read Article →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Category Filter + Blog Grid -->
+<section class="section-pad" style="background:var(--cream)">
+  <div class="container">
+    <div class="filter-bar">
+      <button class="filter-chip active" onclick="filterPosts('all',this)">All</button>
+      <button class="filter-chip" onclick="filterPosts('routines',this)">Routines</button>
+      <button class="filter-chip" onclick="filterPosts('ingredients',this)">Ingredients</button>
+      <button class="filter-chip" onclick="filterPosts('skin-types',this)">Skin Types</button>
+      <button class="filter-chip" onclick="filterPosts('anti-aging',this)">Anti-Aging</button>
+      <button class="filter-chip" onclick="filterPosts('acne',this)">Acne</button>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+
+      <article class="blog-card fade-in" data-category="routines" id="layering">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80" alt="Morning routine" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Routines</div>
+          <h3>The Perfect 5-Step Morning Skincare Routine</h3>
+          <p>Start your day right with a simple, effective morning routine. Cleanser → toner → serum → moisturizer → SPF. We explain why order matters and how to choose products for your skin type.</p>
+          <div class="blog-meta"><span>📖 5 min read</span><span>January 2025</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-200);font-size:0.85rem;color:var(--espresso)">
+            <strong>Quick Tips:</strong>
+            <ul style="margin-top:0.5rem;padding-left:1.2rem;color:var(--gray-600);line-height:1.8">
+              <li>Always apply thinnest to thickest consistency</li>
+              <li>Wait 30 seconds between layers for absorption</li>
+              <li>SPF is non-negotiable — rain or shine</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="ingredients">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80" alt="Vitamin C" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Ingredients</div>
+          <h3>Vitamin C: The Complete Guide for Every Skin Type</h3>
+          <p>Concentration matters, form matters, pH matters. We decode everything you need to know about Vitamin C — and how to avoid the most common mistakes.</p>
+          <div class="blog-meta"><span>📖 7 min read</span><span>February 2025</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-200);font-size:0.85rem;color:var(--espresso)">
+            <strong>Best For:</strong>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.5rem">
+              <span class="badge" style="background:var(--blush-light);color:var(--rose-dark)">Brightening</span>
+              <span class="badge" style="background:var(--blush-light);color:var(--rose-dark)">Anti-Aging</span>
+              <span class="badge" style="background:var(--blush-light);color:var(--rose-dark)">Dark Spots</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="skin-types">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=80" alt="Skin types" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Skin Types</div>
+          <h3>How to Actually Identify Your True Skin Type</h3>
+          <p>Many people misidentify their skin type and end up using the wrong products. Our simple bare-face test will help you find out whether you're truly oily, dry, combination, or sensitive.</p>
+          <div class="blog-meta"><span>📖 4 min read</span><span>February 2025</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-200);font-size:0.85rem">
+            <strong style="color:var(--espresso)">The Bare Face Test:</strong>
+            <p style="margin-top:0.4rem;font-size:0.82rem;color:var(--gray-600)">Wash your face, wait 1 hour with no products, then examine how it feels. Tight = dry. Shiny all over = oily. Shiny T-zone = combination.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="anti-aging">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80" alt="Retinol" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Anti-Aging</div>
+          <h3>Retinol 101: A Beginner's Guide to the Gold-Standard Anti-Ager</h3>
+          <p>Retinol can be intimidating, but used correctly it's the most proven anti-aging ingredient available. Here's how to introduce it safely and avoid the dreaded "retinol uglies."</p>
+          <div class="blog-meta"><span>📖 9 min read</span><span>January 2025</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-200)">
+            <div style="background:#fef3c7;border-radius:8px;padding:0.7rem;font-size:0.8rem;color:#92400e">
+              ⚠️ <strong>Tip:</strong> Start with 0.025–0.05% only 2x per week. Always use SPF the next morning.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="acne">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&q=80" alt="Acne" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Acne</div>
+          <h3>Breaking Down Acne: Real Causes & Science-Backed Treatments</h3>
+          <p>Acne isn't caused by dirty skin or eating chocolate. We break down the true hormonal and bacterial causes, and give you a step-by-step approach to clearer skin.</p>
+          <div class="blog-meta"><span>📖 10 min read</span><span>March 2025</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-200);font-size:0.82rem;color:var(--gray-600)">
+            <strong style="color:var(--espresso)">Key Ingredients:</strong> Salicylic Acid, Benzoyl Peroxide, Niacinamide, Azelaic Acid
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="ingredients">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80" alt="Hydration" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Ingredients</div>
+          <h3>Hyaluronic Acid vs Glycerin vs Squalane: Which Hydrator Wins?</h3>
+          <p>Not all moisturizing ingredients work the same way. We compare the three most-loved humectants and occlusives so you can choose what's right for your skin's unique needs.</p>
+          <div class="blog-meta"><span>📖 6 min read</span><span>December 2024</span></div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="ingredients">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1631390285554-0bb3c5d7d5a1?w=600&q=80" alt="Niacinamide" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Ingredients</div>
+          <h3>Why Niacinamide Belongs in Every Skincare Routine</h3>
+          <p>Pore-minimizing, brightening, oil-controlling, barrier-strengthening — niacinamide does it all with zero irritation. Find out why it's the most universally loved skincare ingredient.</p>
+          <div class="blog-meta"><span>📖 5 min read</span><span>November 2024</span></div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="anti-aging">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1643185540226-29f4b38a4bb1?w=600&q=80" alt="Eye cream" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Anti-Aging</div>
+          <h3>Do You Actually Need an Eye Cream? The Honest Answer</h3>
+          <p>Eye creams are one of the most debated products in skincare. We give you the science-backed truth and explain exactly when they're worth it — and when to skip them.</p>
+          <div class="blog-meta"><span>📖 5 min read</span><span>October 2024</span></div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in" data-category="routines">
+        <div class="blog-card-img">
+          <img src="https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb0?w=600&q=80" alt="Night routine" loading="lazy">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-category">Routines</div>
+          <h3>The Ultimate Night Routine for Waking Up with Glowing Skin</h3>
+          <p>Nighttime is when your skin regenerates fastest. Learn how to build a powerful nighttime routine that works while you sleep — with products for every budget.</p>
+          <div class="blog-meta"><span>📖 6 min read</span><span>September 2024</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div id="noPostsMsg" style="display:none" class="empty-state">
+      <div class="empty-icon">📝</div>
+      <h3>No posts in this category yet</h3>
+      <p>Check back soon — we publish new guides every week.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Skin Quiz CTA -->
+<section style="background:linear-gradient(135deg,var(--blush-light),var(--sage-light));padding:5rem 0">
+  <div class="container" style="text-align:center">
+    <span class="section-label">Personalized</span>
+    <h2>Not Sure Where to Start?</h2>
+    <p style="max-width:480px;margin:1rem auto 2rem">Answer 5 quick questions and we'll recommend the perfect routine and products for your unique skin type and concerns.</p>
+    <a href="/products.html" class="btn btn-primary btn-lg">Find My Routine →</a>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1;max-width:600px;margin:0 auto;text-align:center">
+    <span class="section-label" style="color:var(--blush)">Weekly Tips</span>
+    <h2>Get Skincare Tips in Your Inbox</h2>
+    <p>Join 15,000+ subscribers. New guides every Tuesday. No spam, ever.</p>
+    <div style="display:flex;gap:0;margin-top:2rem;border-radius:var(--radius-full);overflow:hidden;border:1px solid rgba(255,255,255,0.2)">
+      <input type="email" id="nlEmail" placeholder="your@email.com"
+        style="flex:1;padding:1rem 1.5rem;background:rgba(255,255,255,0.08);border:none;color:var(--cream);font-size:0.9rem;outline:none">
+      <button onclick="subscribe()" class="btn btn-rose" style="border-radius:0;padding:1rem 1.5rem;white-space:nowrap">Subscribe →</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">Lumière</span>
+        <p>Science-backed skincare with clean, botanical ingredients. Because your skin deserves the very best.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">𝕏</a><a href="#" class="social-link">📸</a><a href="#" class="social-link">📌</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Shop</h5><ul>
+        <li><a href="/products.html">All Products</a></li>
+        <li><a href="/products.html?bestseller=true">Bestsellers</a></li>
+        <li><a href="/products.html?category=serum">Serums</a></li>
+        <li><a href="/products.html?category=moisturizer">Moisturizers</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Learn</h5><ul>
+        <li><a href="/blog.html">Skin Tips</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Account</h5><ul>
+        <li><a href="/login.html">Sign In</a></li>
+        <li><a href="/register.html">Create Account</a></li>
+        <li><a href="/cart.html">My Cart</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Lumière Skincare. All rights reserved.</span>
+      <div style="display:flex;gap:1.5rem"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+  function filterPosts(category, btn) {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const cards = document.querySelectorAll('.blog-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const match = category === 'all' || card.dataset.category === category;
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    document.getElementById('noPostsMsg').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function subscribe() {
+    const email = document.getElementById('nlEmail').value;
+    if (email && email.includes('@')) {
+      Toast.show('You\'re subscribed! Check your inbox for a welcome gift 🌸', 'success');
+      document.getElementById('nlEmail').value = '';
+    } else {
+      Toast.show('Please enter a valid email address.', 'error');
+    }
+  }
+</script>
+</body>
+</html>

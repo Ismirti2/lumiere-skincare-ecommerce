@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumière Skincare — Radiant Skin, Naturally</title>
+  <meta name="description" content="Science-backed, botanical skincare that transforms your skin. Shop serums, moisturizers, cleansers, and more.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lumière <span>·</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/products.html">Products</a></li>
+      <li><a href="/blog.html">Skin Tips</a></li>
+      <li><a href="/testimonials.html">Reviews</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-user-name"></span><a href="/orders.html" class="btn-nav nav-orders-link" style="display:none">My Orders</a>
+      <a href="/cart.html" class="nav-icon-btn" title="Cart" style="position:relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge">0</span>
+      </a>
+      <a href="/login.html" class="nav-icon-btn nav-login-link" title="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a href="/login.html" class="btn-nav nav-login-link">Sign In</a>
+      <button class="btn-nav nav-logout-btn" onclick="Auth.logout()" style="display:none">Log Out</button>
+    </div>
+    <div class="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav" role="navigation">
+  <a href="/">Home</a><a href="/about.html">About</a><a href="/products.html">Products</a>
+  <a href="/blog.html">Skin Tips</a><a href="/testimonials.html">Reviews</a>
+  <a href="/contact.html">Contact</a><a href="/cart.html">Cart</a><a href="/orders.html" class="nav-orders-link" style="display:none">My Orders</a><a href="/login.html">Login</a>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🌿 Clean Beauty · Cruelty-Free · Dermatologist Tested</div>
+    <h1 class="hero-title">Your Skin<br>Deserves the<br><em>Very Best</em></h1>
+    <p class="hero-subtitle">Science-backed formulas with botanical ingredients. Tailored routines for your unique skin. Real results you can see and feel.</p>
+    <div class="hero-actions">
+      <a href="/products.html" class="btn btn-primary btn-lg">Shop All Products</a>
+      <a href="/blog.html" class="btn btn-outline btn-lg">Skin Tips &amp; Guides</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="number">50K+</span><span class="label">Happy Customers</span></div>
+      <div class="stat-item"><span class="number">4.9★</span><span class="label">Average Rating</span></div>
+      <div class="stat-item"><span class="number">100%</span><span class="label">Clean Ingredients</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=80" alt="Skincare">
+      <div class="hero-img-overlay"></div>
+    </div>
+    <div class="hero-product-card">
+      <img class="hero-card-img" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=200&q=80" alt="Serum">
+      <div class="hero-card-info">
+        <div class="name">Vitamin C Serum</div>
+        <div class="rating-row"><span class="stars-gold">★★★★★</span><span>4.8 · 234 reviews</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES BAR ══════════════════════════════════════════════════════════ -->
+<section class="section-pad-sm" style="background:white;border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)">
+  <div class="container">
+    <div class="features-row">
+      <div class="feature-card fade-in"><div class="feature-icon">🌿</div><h4>Clean Formulas</h4><p>No parabens, sulfates, or synthetic fragrances. Ever.</p></div>
+      <div class="feature-card fade-in"><div class="feature-icon">🔬</div><h4>Science-Backed</h4><p>Every ingredient chosen for proven efficacy and safety.</p></div>
+      <div class="feature-card fade-in"><div class="feature-icon">🐰</div><h4>Cruelty-Free</h4><p>Certified cruelty-free. Never tested on animals.</p></div>
+      <div class="feature-card fade-in"><div class="feature-icon">🚚</div><h4>Free Shipping</h4><p>Free shipping on all orders over $50. Easy returns.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURED PRODUCTS ═════════════════════════════════════════════════════ -->
+<section class="section-pad" style="background:var(--cream)">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Our Best</span>
+      <h2>Bestselling Favorites</h2>
+      <p>Products our community can't stop raving about — formulated with purpose, loved for results.</p>
+    </div>
+    <div class="products-grid" id="featuredProducts"><!-- loaded by JS --></div>
+    <div id="featuredError" style="display:none" class="empty-state">
+      <div class="empty-icon">🌸</div>
+      <h3>Products Loading</h3>
+      <p>Start the backend server and seed the database to see products here.<br>
+      Run: <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px">cd backend &amp;&amp; npm install &amp;&amp; npm run dev</code></p>
+    </div>
+    <div class="text-center" style="margin-top:3rem">
+      <a href="/products.html" class="btn btn-outline btn-lg">View All Products →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BRAND STORY ════════════════════════════════════════════════════════════ -->
+<section class="section-pad" style="background:linear-gradient(135deg,var(--blush-light) 0%,var(--sage-light) 100%)">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div>
+        <span class="section-label">Our Story</span>
+        <h2>Born from a Passion for <em>Healthy Skin</em></h2>
+        <p style="margin:1.2rem 0">Lumière was founded on a simple belief: everyone deserves skincare that actually works. We obsess over ingredients so you don't have to — every formula is crafted with intention, transparency, and love for your skin.</p>
+        <p style="margin-bottom:1.5rem">From our lab in California to your bathroom shelf, we promise clean, effective, and sustainable beauty that delivers visible results within weeks.</p>
+        <a href="/about.html" class="btn btn-primary">Read Our Story</a>
+      </div>
+      <div class="about-img-collage">
+        <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=700&q=80" alt="About Lumière">
+        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&q=80" alt="Ingredients">
+        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80" alt="Products">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKIN TIPS TEASER ═══════════════════════════════════════════════════════ -->
+<section class="section-pad" style="background:var(--cream)">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Knowledge</span>
+      <h2>Skin Tips &amp; Guides</h2>
+      <p>From morning routines to ingredient deep-dives — expert knowledge to help your skin thrive.</p>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card fade-in">
+        <div class="blog-card-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80" alt="Routine" loading="lazy"></div>
+        <div class="blog-card-body">
+          <div class="blog-category">Routines</div>
+          <h3>The Perfect 5-Step Morning Routine</h3>
+          <p>Start your day right with a routine that protects, hydrates, and primes your skin for everything ahead.</p>
+          <div class="blog-meta"><span>📖 5 min read</span><span>January 2025</span></div>
+        </div>
+      </article>
+      <article class="blog-card fade-in">
+        <div class="blog-card-img"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80" alt="Vitamin C" loading="lazy"></div>
+        <div class="blog-card-body">
+          <div class="blog-category">Ingredients</div>
+          <h3>Vitamin C: The Complete Ingredient Guide</h3>
+          <p>Everything you need to know about using Vitamin C effectively — forms, concentrations, and what to pair it with.</p>
+          <div class="blog-meta"><span>📖 7 min read</span><span>February 2025</span></div>
+        </div>
+      </article>
+      <article class="blog-card fade-in">
+        <div class="blog-card-img"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Skin types" loading="lazy"></div>
+        <div class="blog-card-body">
+          <div class="blog-category">Skin Types</div>
+          <h3>Know Your Skin Type: Build the Right Routine</h3>
+          <p>Understanding your skin is the first step to transformative results. Take our simple test.</p>
+          <div class="blog-meta"><span>📖 6 min read</span><span>March 2025</span></div>
+        </div>
+      </article>
+    </div>
+    <div class="text-center" style="margin-top:2.5rem">
+      <a href="/blog.html" class="btn btn-outline btn-lg">Read More Tips →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS TEASER ════════════════════════════════════════════════════ -->
+<section class="section-pad" style="background:white">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Reviews</span>
+      <h2>What Our Community Says</h2>
+      <p>Real reviews from real customers who've transformed their skin with Lumière.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars" style="color:#F59E0B">★★★★★</div>
+        <p class="testimonial-text">"The Vitamin C serum is absolute magic. Within 3 weeks my dark spots visibly faded and my skin has this gorgeous glow. I've tried so many products and this one truly delivers."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar-placeholder">S</div>
+          <div><div class="author-name">Sarah M.</div><div class="author-tag">Combination Skin · Verified Buyer</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars" style="color:#F59E0B">★★★★★</div>
+        <p class="testimonial-text">"As someone with sensitive skin, finding products that don't irritate is a challenge. The Gentle Foam Cleanser is perfect — leaves my skin clean, calm, and balanced every single time."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar-placeholder">E</div>
+          <div><div class="author-name">Emma K.</div><div class="author-tag">Sensitive Skin · Verified Buyer</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars" style="color:#F59E0B">★★★★★</div>
+        <p class="testimonial-text">"The Hydra-Burst moisturizer has completely changed my skin. I used to get so dry by midday but now my skin stays plump and hydrated all day. Worth every penny!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar-placeholder">J</div>
+          <div><div class="author-name">James L.</div><div class="author-tag">Dry Skin · Verified Buyer</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:2.5rem">
+      <a href="/testimonials.html" class="btn btn-outline btn-lg">Read All Reviews →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ════════════════════════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1">
+    <span class="section-label" style="color:var(--blush)">Start Today</span>
+    <h2 style="font-size:clamp(2rem,4vw,3.5rem)">Ready to Transform Your Skin?</h2>
+    <p>Join over 50,000 customers who have discovered their best skin yet with Lumière.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="/products.html" class="btn btn-rose btn-lg">Shop Now</a>
+      <a href="/register.html" class="btn btn-lg" style="border:1.5px solid rgba(250,246,241,0.4);color:var(--cream);background:transparent">Create Account</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">Lumière</span>
+        <p>Science-backed skincare with clean, botanical ingredients. Because your skin deserves the very best.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">📸</a>
+          <a href="#" class="social-link" aria-label="Pinterest">📌</a>
+          <a href="#" class="social-link" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Shop</h5><ul>
+        <li><a href="/products.html?category=serum">Serums</a></li>
+        <li><a href="/products.html?category=moisturizer">Moisturizers</a></li>
+        <li><a href="/products.html?category=cleanser">Cleansers</a></li>
+        <li><a href="/products.html?category=sunscreen">Sunscreen</a></li>
+        <li><a href="/products.html?bestseller=true">Bestsellers</a></li>
+        <li><a href="/products.html?featured=true">New Arrivals</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Help</h5><ul>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/blog.html">Skin Tips</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns Policy</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Newsletter</h5>
+        <p style="color:rgba(250,246,241,0.6);font-size:0.82rem;margin-bottom:1rem">Get 10% off your first order + skincare tips every week.</p>
+        <div class="newsletter-form">
+          <input type="email" id="nlEmail" placeholder="Your email address">
+          <button onclick="handleNewsletter('nlEmail')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Lumière Skincare. All rights reserved.</span>
+      <div style="display:flex;gap:1.5rem"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+async function loadFeaturedProducts() {
+  const grid = document.getElementById('featuredProducts');
+  grid.innerHTML = buildSkeletonCards(3);
+  try {
+    const data = await api.getFeatured();
+    if (data.products && data.products.length > 0) {
+      grid.innerHTML = data.products.map(buildProductCard).join('');
+      initScrollAnimations();
+    } else {
+      grid.innerHTML = '';
+      document.getElementById('featuredError').style.display = 'block';
+    }
+  } catch (err) {
+    grid.innerHTML = '';
+    document.getElementById('featuredError').style.display = 'block';
+  }
+}
+loadFeaturedProducts();
+</script>
+</body>
+</html>

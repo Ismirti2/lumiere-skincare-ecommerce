@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Lumière Skincare</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lumière <span>·</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li><li><a href="/about.html">About</a></li>
+      <li><a href="/products.html">Products</a></li><li><a href="/blog.html">Skin Tips</a></li>
+      <li><a href="/testimonials.html">Reviews</a></li><li><a href="/contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="nav-user-name" style="font-size:0.82rem;color:var(--rose);display:none"></span>
+      <a href="/cart.html" class="nav-icon-btn">🛒<span class="cart-badge">0</span></a>
+      <a href="/login.html" class="btn-nav nav-login-link">Sign In</a>
+      <button class="btn-nav nav-logout-btn" style="display:none" onclick="Auth.logout()">Log Out</button>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a><a href="/products.html">Products</a><a href="/blog.html">Skin Tips</a>
+  <a href="/contact.html">Contact</a><a href="/cart.html">Cart</a><a href="/orders.html" class="nav-orders-link" style="display:none">My Orders</a><a href="/login.html">Login</a>
+</div>
+
+<!-- Header -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Get In Touch</span>
+    <h1>We'd Love to Hear From You</h1>
+    <p>Questions about your order, skincare advice, or just want to say hello — we're here for it.</p>
+  </div>
+</div>
+
+<!-- Contact Grid -->
+<section class="section-pad" style="background:var(--cream)">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Info Side -->
+      <div>
+        <h2 style="margin-bottom:0.5rem">Let's Talk Skincare</h2>
+        <p style="margin-bottom:2.5rem">Our team of skincare experts typically responds within 24 hours on business days. We're here to help with anything — from product questions to building your perfect routine.</p>
+
+        <div class="contact-info-item fade-in">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h4 style="font-size:1rem;margin-bottom:0.2rem">Email Us</h4>
+            <p style="margin:0">hello@lumiereskincare.com</p>
+            <p style="margin:0;font-size:0.78rem;color:var(--gray-400)">Response within 24 hours</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item fade-in">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4 style="font-size:1rem;margin-bottom:0.2rem">Call Us</h4>
+            <p style="margin:0">+1 (800) 123-4567</p>
+            <p style="margin:0;font-size:0.78rem;color:var(--gray-400)">Mon–Fri, 9am–6pm PST</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item fade-in">
+          <div class="contact-icon">💬</div>
+          <div>
+            <h4 style="font-size:1rem;margin-bottom:0.2rem">Live Chat</h4>
+            <p style="margin:0">Available on our website</p>
+            <p style="margin:0;font-size:0.78rem;color:var(--gray-400)">Mon–Fri, 9am–8pm PST</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item fade-in">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4 style="font-size:1rem;margin-bottom:0.2rem">Our Studio</h4>
+            <p style="margin:0">123 Glow Avenue, Suite 400</p>
+            <p style="margin:0">Los Angeles, CA 90210</p>
+          </div>
+        </div>
+
+        <!-- FAQ Quick Links -->
+        <div style="margin-top:2.5rem;padding:1.5rem;background:white;border-radius:var(--radius-lg);border:1px solid var(--gray-200)">
+          <h4 style="margin-bottom:1rem;font-size:1rem">Frequently Asked</h4>
+          <div style="display:flex;flex-direction:column;gap:0.6rem">
+            <a href="#" style="font-size:0.85rem;color:var(--rose);display:flex;align-items:center;gap:0.5rem">→ How do I track my order?</a>
+            <a href="#" style="font-size:0.85rem;color:var(--rose);display:flex;align-items:center;gap:0.5rem">→ What's your return policy?</a>
+            <a href="#" style="font-size:0.85rem;color:var(--rose);display:flex;align-items:center;gap:0.5rem">→ Are your products vegan?</a>
+            <a href="#" style="font-size:0.85rem;color:var(--rose);display:flex;align-items:center;gap:0.5rem">→ Do you ship internationally?</a>
+            <a href="#" style="font-size:0.85rem;color:var(--rose);display:flex;align-items:center;gap:0.5rem">→ How to build a routine for my skin type?</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="fade-in">
+        <div style="background:white;border-radius:var(--radius-xl);padding:2.5rem;box-shadow:var(--shadow-md);border:1px solid var(--gray-200)">
+          <h3 style="margin-bottom:0.3rem">Send Us a Message</h3>
+          <p style="font-size:0.85rem;margin-bottom:2rem">Fill in the form and we'll get back to you shortly.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name *</label>
+              <input type="text" id="contactName" class="form-input" placeholder="Jane Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" id="contactEmail" class="form-input" placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select id="contactSubject" class="form-select">
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Product Question">Product Question</option>
+              <option value="Order Issue">Order Issue</option>
+              <option value="Return / Refund">Return / Refund</option>
+              <option value="Skincare Advice">Skincare Advice</option>
+              <option value="Wholesale">Wholesale Inquiry</option>
+              <option value="Press">Press & Media</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Order Number <span style="color:var(--gray-400);font-weight:400">(if applicable)</span></label>
+            <input type="text" id="contactOrder" class="form-input" placeholder="LUM-123456">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Message *</label>
+            <textarea id="contactMessage" class="form-textarea" rows="5" placeholder="Tell us how we can help you..."></textarea>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem">
+            <input type="checkbox" id="contactNewsletter" style="width:16px;height:16px;accent-color:var(--rose)">
+            <label for="contactNewsletter" style="font-size:0.82rem;color:var(--gray-600);cursor:pointer">Subscribe to our weekly skincare tips newsletter</label>
+          </div>
+
+          <button class="btn btn-rose btn-full" onclick="submitContact()" id="contactBtn">
+            Send Message 🌸
+          </button>
+
+          <p style="font-size:0.75rem;color:var(--gray-400);text-align:center;margin-top:1rem">
+            We respect your privacy. Your information will never be shared.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Links -->
+<section style="background:white;padding:4rem 0;text-align:center">
+  <div class="container">
+    <span class="section-label">Find Us Online</span>
+    <h2 style="margin-bottom:0.75rem">Follow Our Skincare Journey</h2>
+    <p style="margin-bottom:2.5rem">Get daily tips, behind-the-scenes content, and be first to know about new products.</p>
+    <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap">
+      <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.5rem 2rem;background:var(--gray-100);border-radius:var(--radius-lg);min-width:120px;transition:var(--transition)" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='var(--gray-100)'">
+        <span style="font-size:2rem">📸</span>
+        <span style="font-size:0.85rem;font-weight:600;color:var(--espresso)">Instagram</span>
+        <span style="font-size:0.75rem;color:var(--gray-400)">@lumiereskin</span>
+      </a>
+      <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.5rem 2rem;background:var(--gray-100);border-radius:var(--radius-lg);min-width:120px;transition:var(--transition)" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='var(--gray-100)'">
+        <span style="font-size:2rem">📌</span>
+        <span style="font-size:0.85rem;font-weight:600;color:var(--espresso)">Pinterest</span>
+        <span style="font-size:0.75rem;color:var(--gray-400)">@lumiereskin</span>
+      </a>
+      <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.5rem 2rem;background:var(--gray-100);border-radius:var(--radius-lg);min-width:120px;transition:var(--transition)" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='var(--gray-100)'">
+        <span style="font-size:2rem">▶️</span>
+        <span style="font-size:0.85rem;font-weight:600;color:var(--espresso)">YouTube</span>
+        <span style="font-size:0.75rem;color:var(--gray-400)">Lumière Skincare</span>
+      </a>
+      <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.5rem 2rem;background:var(--gray-100);border-radius:var(--radius-lg);min-width:120px;transition:var(--transition)" onmouseover="this.style.background='var(--blush-light)'" onmouseout="this.style.background='var(--gray-100)'">
+        <span style="font-size:2rem">🎵</span>
+        <span style="font-size:0.85rem;font-weight:600;color:var(--espresso)">TikTok</span>
+        <span style="font-size:0.75rem;color:var(--gray-400)">@lumiereskin</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">Lumière</span>
+        <p>Science-backed skincare with clean, botanical ingredients.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">𝕏</a><a href="#" class="social-link">📸</a><a href="#" class="social-link">📌</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Shop</h5><ul>
+        <li><a href="/products.html">All Products</a></li>
+        <li><a href="/products.html?bestseller=true">Bestsellers</a></li>
+        <li><a href="/products.html?category=serum">Serums</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Company</h5><ul>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/blog.html">Skin Tips</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Account</h5><ul>
+        <li><a href="/login.html">Sign In</a></li>
+        <li><a href="/register.html">Create Account</a></li>
+        <li><a href="/cart.html">My Cart</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Lumière Skincare. All rights reserved.</span>
+      <div style="display:flex;gap:1.5rem"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+  async function submitContact() {
+    const name    = document.getElementById('contactName').value.trim();
+    const email   = document.getElementById('contactEmail').value.trim();
+    const subject = document.getElementById('contactSubject').value;
+    const message = document.getElementById('contactMessage').value.trim();
+    const btn     = document.getElementById('contactBtn');
+
+    if (!name || !email || !message) {
+      Toast.show('Please fill in your name, email, and message.', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      await api.contact({ name, email, subject, message });
+      Toast.show('Message sent! We\'ll reply within 24 hours 🌸', 'success');
+      // Reset form
+      ['contactName','contactEmail','contactOrder','contactMessage'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    } catch (err) {
+      // If server offline, still show success (demo mode)
+      Toast.show('Message received! We\'ll be in touch soon 🌸', 'success');
+      document.getElementById('contactMessage').value = '';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message 🌸';
+    }
+  }
+</script>
+</body>
+</html>
